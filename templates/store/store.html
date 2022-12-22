@@ -129,11 +129,11 @@
 	<div class="col-md-4">
 		<figure class="card card-product-grid">
 			<div class="img-wrap"> 
-				<img src="{{ product.images.url }}">
+				<a href="{{ product.get_url }}"><img src="{{ product.images.url }}"></a>
 			</div> <!-- img-wrap.// -->
 			<figcaption class="info-wrap">
 				<div class="fix-height">
-					<a href="./product-detail.html" class="title">{{product.product_name}}</a>
+					<a href="{{ product.get_url }}" class="title">{{product.product_name}}</a>
 					<div class="price-wrap mt-2">
 						<span class="price">{{product.price}}000T</span>
 					</div> <!-- price-wrap.// -->
