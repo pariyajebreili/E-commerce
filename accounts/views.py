@@ -27,7 +27,7 @@ def register(request):
             user.phone_number = phone_number
             user.save()
 
-            ## USER ACTIVATION
+            # USER ACTIVATION
             current_site = get_current_site(request)
             mail_subject = 'Please activate your account'
             message = render_to_string('accounts/account_verification_email.html', {
@@ -37,17 +37,18 @@ def register(request):
                 'token': default_token_generator.make_token(user),
             })
             to_email = email
-            send_email = EmailMessage(mail_subject, message,to=[to_email])
+            send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            messages.success(request, 'Thank you for Registration')
+            # messages.success(request, 'Thank you for registering with us. We have sent you a verification email to your email address [rathan.kumar@gmail.com]. Please verify it.')
             return redirect('/accounts/login/?command=verification&email='+email)
-
     else:
         form = RegistrationForm()
     context = {
         'form': form,
     }
     return render(request, 'accounts/register.html', context)
+
+
 
 
 
@@ -60,11 +61,13 @@ def login(request):
 
         if user is not None:
             auth.login(request,user)
-            return redirect('dashboard')
+            return redirect('/')
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')
     return render(request, 'accounts/login.html')
+
+
 
 
 
@@ -74,6 +77,8 @@ def logout(request):
     auth.logout(request)
     messages.success(request, 'You are logged out.')
     return redirect('login')
+
+
 
 
 
@@ -97,9 +102,13 @@ def activate(request, uidb64, token):
         return redirect('register')
 
 
+
+
+
 @login_required(login_url = 'login')
 def dashboard(request):
     pass
+
 
 
 
@@ -134,6 +143,7 @@ def forgotPassword(request):
 
 
 
+
 def resetpassword_validate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -148,6 +158,7 @@ def resetpassword_validate(request, uidb64, token):
     else:
         messages.error(request, 'This link has been expired!')
         return redirect('login')
+
 
 
 
