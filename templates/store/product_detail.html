@@ -32,16 +32,16 @@
 			<hr>
 				<div class="row">
 					<div class="item-option-select">
-						<h6>Choose Color</h6>
+						<h6>Kilo</h6>
 						<select name="color" class="form-control" required>
 							<option value="" disabled selected>Select</option>
-							{% for i in single_product.variation_set.colors %}
+							{% for i in single_product.variation_set.kilo %}
 							<option value="{{i.variation_value | lower}}">{{i.variation_value | capfirst }}</option>							
 							{% endfor %}
 						</select>
 					</div>
 				</div> <!-- row.// -->
-				<div class="row">
+				<!--<div class="row">
 					<div class="item-option-select">
 						<h6>Select Size</h6>
 						<select name="size" class="form-control">
@@ -51,12 +51,12 @@
 							{% endfor %}						
 						</select>
 					</div>
-				</div> <!-- row.// -->
+				</div> row.//-->
 				<hr>
 				{% if single_product.stock <= 0 %}
 					<h4 class ="text-danger"> Out of stock</h4>
 				{% else %}
-					<button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </button>
+					<button type="submit" class="btn  btn-success"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </button>
 				{% endif %}
 				</article> <!-- product-info-aside .// -->
 			</form>
