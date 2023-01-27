@@ -1,4 +1,4 @@
-from django import forms 
+from django import forms
 from .models import Account
 
 
@@ -7,7 +7,6 @@ class RegistrationForm(forms.ModelForm):
         'placeholder': 'Enter Password',
         'class': 'form-control',
     }))
-
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Confirm Password'
     }))
@@ -26,7 +25,6 @@ class RegistrationForm(forms.ModelForm):
                 "Password does not match!"
             )
 
-
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs['placeholder'] = 'Enter First Name'
@@ -35,4 +33,3 @@ class RegistrationForm(forms.ModelForm):
         self.fields['email'].widget.attrs['placeholder'] = 'Enter Email Address'
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
-
