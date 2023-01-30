@@ -46,10 +46,12 @@ def product_detail(request, category_slug, product_slug):
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=single_product).exists()
     except Exception as e:
         raise e
-    
+
+    reviews = ReviewRating.objects.filter(product_id=single_product.id, status=True)
     context = {
         'single_product': single_product,
         'in_cart': in_cart,
+        'reviews': reviews,
     }
      
     return render(request, 'store/product_detail.html',context)
@@ -70,6 +72,7 @@ def search(request):
 
 
 def submit_review(request, product_id):
+    #print('Submit its here')
     url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
         try:
